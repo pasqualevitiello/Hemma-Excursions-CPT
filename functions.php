@@ -506,16 +506,16 @@ function opendept_register_excursion_sidebar_metabox() {
 }
 
 /**
- * Add Post Summary Meta Box in Room, Event, Food and Deal posts
+ * Add Post Summary Meta Box in Excursion posts
  */
-add_action( 'cmb2_admin_init', 'opendept_register_summary_metabox' );
-function opendept_register_summary_metabox() {
-	$prefix = 'opendept_summary_';
+add_action( 'cmb2_admin_init', 'opendept_register_summary_excursion_metabox' );
+function opendept_register_summary_excursion_metabox() {
+	$prefix = 'opendept_summary_excursion_';
 
 	$cmb_summary = new_cmb2_box( array(
 		'id'            => $prefix . 'metabox',
 		'title'         => esc_html__( 'Post Summary', 'hemma' ),
-		'object_types'  => array( 'room', 'event', 'food', 'deal' ),
+		'object_types'  => array( 'excursion' ),
 		'context'      => 'normal',
 		'priority'     => 'high',
 	) );
@@ -540,7 +540,7 @@ function opendept_register_summary_metabox() {
  */
 add_action( 'cmb2_admin_init', 'opendept_register_listed_posts_excursion_metabox' );
 function opendept_register_listed_posts_excursion_metabox() {
-	$prefix = 'opendept_listed_posts_excursion';
+	$prefix = 'opendept_listed_posts_excursion_';
 
 	$cmb_listed_posts_excursion = new_cmb2_box( array(
 		'id'            => $prefix . 'metabox',
