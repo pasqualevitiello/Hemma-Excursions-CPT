@@ -31,7 +31,7 @@ function hemma_excursions_cpt() {
 			'show_ui' => true,
 			'hierarchical' => false,
 			'has_archive' => false,
-			'menu_icon' => 'dashicons-grid-view',
+			'menu_icon' => 'dashicons-calendar',
 			'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments', 'revisions' ),
 			'taxonomies' => array( 'excursioncategory', 'post_tag' )
        );  
