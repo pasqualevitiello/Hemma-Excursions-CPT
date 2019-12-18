@@ -1,4 +1,42 @@
 <?php
+/**
+ * Hemma Child functions and definitions.
+ *
+ * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ *
+ * @package Hemma
+ */
+
+/**
+ * Enqueue the parent theme style.
+ *
+ * @link https://codex.wordpress.org/Child_Themes
+ */
+function hemma_parent_style() {
+    wp_enqueue_style( 'hemma-style',
+    	get_template_directory_uri() . '/style.css',
+    	array('hemma-plugins-style'),
+    	wp_get_theme()->get('Version')
+    );
+}
+add_action( 'wp_enqueue_scripts', 'hemma_parent_style' );
+
+/**
+ * Enqueue the child theme style.
+ * If your child theme style.css contains actual CSS code, use the code below to enqueue it.
+ *
+ * @link https://codex.wordpress.org/Child_Themes
+ *
+ * function hemma_child_style() {
+ *    wp_enqueue_style( 'hemma-child-style',
+ *        get_stylesheet_directory_uri() . '/style.css',
+ *        array( 'hemma-style' ),
+ *        wp_get_theme()->get('Version')
+ *    );
+ *}
+ * add_action( 'wp_enqueue_scripts', 'hemma_child_style' );
+ *
+ */
 
 /**
  * Create Hemma Excursions custom post types
@@ -235,7 +273,7 @@ add_action( 'after_setup_theme', 'hemma_customize_child_theme_setup' );
  */
 add_action( 'cmb2_admin_init', 'opendept_register_excursion_subtitle_metabox' );
 function opendept_register_excursion_subtitle_metabox() {
-	$prefix = 'opendept_excursion_subtitle_';
+	$prefix = 'opendept_subtitle_';
 
 	$cmb_subtitle = new_cmb2_box( array(
 		'id'            => $prefix . 'metabox',
@@ -283,84 +321,6 @@ function opendept_register_filter_excursion_metabox() {
 	        'hide_empty' => true,
 	    ),
 	) );
-}
-
-/**
- * Add Hero Setting Meta Box in Excursion posts and Excursion pages
- */
-add_action( 'cmb2_admin_init', 'opendept_register_excursion_hero_settings_metabox' );
-function opendept_register_excursion_hero_settings_metabox() {
-	$prefix = 'opendept_hero_excursion_';
-
-	$cmb_hero = new_cmb2_box( array(
-		'id'            => $prefix . 'metabox',
-		'title'         => esc_html__( 'Hero Settings', 'hemma' ),
-		'object_types'  => array( 'excursion' ),
-		'context'       => 'side',
-		'priority'      => 'core',
-		'show_names'    => false,
-	) );
-
-	$cmb_hero->add_field( array(
-		'name'    => esc_html__( 'Fade color', 'hemma' ),
-		'desc'    => esc_html__( 'Fade background image with an overlay color', 'hemma' ),
-		'id'      => $prefix . 'color',
-		'type'    => 'rgba_colorpicker',
-		'default' => 'rgba(53,63,73,0)',
-	) );
-
-	$cmb_hero->add_field( array(
-		'name'    => esc_html__( 'Titles alignment', 'hemma' ),
-		'desc'    => esc_html__( 'Align the title and the subtitle to left or center', 'hemma' ),
-		'id'      => $prefix . 'align',
-		'type'    => 'radio',
-		'default' => 'is-centered',
-		'options' => array(
-			'is-left'     => esc_html__( 'Align left', 'hemma' ),
-			'is-centered' => esc_html__( 'Align center', 'hemma' ),
-		),
-	) );
-
-	$cmb_hero->add_field( array(
-		'name' => esc_html__( 'Hero Height', 'hemma' ),
-		'desc' => esc_html__( 'The minimum height of the hero', 'hemma' ),
-		'id'   => $prefix . 'height',
-		'type' => 'select',
-		'options' => array(
-	        'is-contentheight' => esc_html__( 'Content Height', 'hemma' ),
-	        'is-halfheight'    => esc_html__( 'Half browser height', 'hemma' ),
-	        'is-fullheight'    => esc_html__( 'Full browser height', 'hemma' ),
-	    ),
-	    'default' => 'is-fullheight'
-	) );
-
-	$cmb_hero->add_field( array(
-	    'name' => esc_html__( 'Hero Background Color', 'hemma' ),
-	    'desc' => esc_html__( 'The background color of the hero (useful if there is no image)', 'hemma' ),
-	    'id'   => $prefix . 'bg_color',
-	    'type' => 'select',
-	    'show_option_none' => true,
-	    'options' => array(
-	    	'is-red'        => esc_html__( 'Red', 'hemma' ),
-	    	'is-orange'     => esc_html__( 'Orange', 'hemma' ),
-	    	'is-yellow'     => esc_html__( 'Yellow', 'hemma' ),
-	    	'is-green'      => esc_html__( 'Green', 'hemma' ),
-	    	'is-light-blue' => esc_html__( 'Light Blue', 'hemma' ),
-	    	'is-blue'       => esc_html__( 'Blue', 'hemma' ),
-	    	'is-purple'     => esc_html__( 'Purple', 'hemma' ),
-	    	'is-pink'       => esc_html__( 'Pink', 'hemma' ),
-	    	'is-brown'      => esc_html__( 'Brown', 'hemma' ),
-	    	'is-dark'       => esc_html__( 'Dark', 'hemma' ),
-	    ),
-	) );
-
-	$cmb_hero->add_field( array(
-	    'name'    => esc_html__( 'Display mouse scroll icon', 'hemma' ),
-	    'desc'    => esc_html__( 'Tick this if you want to show a mouse scroll icon at the bottom of the section', 'hemma' ),
-	    'id'      => $prefix . 'mouse_icon',
-	    'type'    => 'checkbox',
-	) );
-
 }
 
 /**
@@ -510,7 +470,7 @@ function opendept_register_excursion_sidebar_metabox() {
  */
 add_action( 'cmb2_admin_init', 'opendept_register_summary_excursion_metabox' );
 function opendept_register_summary_excursion_metabox() {
-	$prefix = 'opendept_summary_excursion_';
+	$prefix = 'opendept_summary_';
 
 	$cmb_summary = new_cmb2_box( array(
 		'id'            => $prefix . 'metabox',
@@ -540,7 +500,7 @@ function opendept_register_summary_excursion_metabox() {
  */
 add_action( 'cmb2_admin_init', 'opendept_register_listed_posts_excursion_metabox' );
 function opendept_register_listed_posts_excursion_metabox() {
-	$prefix = 'opendept_listed_posts_excursion_';
+	$prefix = 'opendept_listed_posts_';
 
 	$cmb_listed_posts_excursion = new_cmb2_box( array(
 		'id'            => $prefix . 'metabox',
