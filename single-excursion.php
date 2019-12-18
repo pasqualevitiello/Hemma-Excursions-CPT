@@ -11,12 +11,12 @@ get_header(); ?>
 
 	<?php
 	$the_id = get_the_ID();
-	$subtitle = get_post_meta( $the_id, 'opendept_excursion_subtitle_subtitle', true );
-	$overlay_bg = get_post_meta( $the_id, 'opendept_hero_excursion_color', true );
-	$titles_align = get_post_meta( $the_id, 'opendept_hero_excursion_align', true );
-	$hero_height = get_post_meta( $the_id, 'opendept_hero_excursion_height', true );
-	$hero_bg_color = get_post_meta( $the_id, 'opendept_hero_excursion_bg_color', true );
-	$hero_mouse_icon = get_post_meta( $the_id, 'opendept_hero_excursion_mouse_icon', true );
+	$subtitle = get_post_meta( $the_id, 'opendept_subtitle_subtitle', true );
+	$overlay_bg = get_post_meta( $the_id, 'opendept_hero_color', true );
+	$titles_align = get_post_meta( $the_id, 'opendept_hero_align', true );
+	$hero_height = get_post_meta( $the_id, 'opendept_hero_height', true );
+	$hero_bg_color = get_post_meta( $the_id, 'opendept_hero_bg_color', true );
+	$hero_mouse_icon = get_post_meta( $the_id, 'opendept_hero_mouse_icon', true );
 	$excursion_date = get_post_meta( $the_id, 'opendept_excursion_date', true );
 	$excursion_place = get_post_meta( $the_id, 'opendept_excursion_place', true );
 	$image_attributes = wp_get_attachment_image_src( get_post_thumbnail_id( $the_id ), 'full' );
@@ -36,11 +36,11 @@ get_header(); ?>
 	$col_class = ' is-8 is-offset-2';
 	if ( $sidebar ) {
 		$col_class = ' is-8';
-	}
+    }
 	?>
 
 	<div id="hero" class="hero is-bg-image is-text-light <?php echo sanitize_html_class( $titles_align ); ?> <?php echo sanitize_html_class( $hero_height ); ?> <?php echo sanitize_html_class( $hero_bg_color ); ?>"<?php if ( $image_attributes ) echo 'style="background-image: url(' . esc_url( $image_attributes[0] ) . ');"' ?>>
-		<div class="hero-content" style="background-color: <?php echo $overlay_bg; ?>">
+		<div class="hero-content" style="background-color: <?php echo esc_attr( $overlay_bg ); ?>">
 			<div class="container is-fluid">
 				<div class="hero-text">
 					<?php the_title( '<h1 class="hero-title">', '</h1>' ); ?>
@@ -81,7 +81,7 @@ get_header(); ?>
 
 	<div class="container">
 		<div class="columns">
-			<div class="column<?php echo $col_class; ?>">
+			<div class="column<?php echo esc_attr( $col_class ); ?>">
 
 				<div id="primary" class="content-area">
 					<main id="main" class="site-main" role="main">
