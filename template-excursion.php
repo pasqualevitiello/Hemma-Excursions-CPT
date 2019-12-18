@@ -12,22 +12,22 @@ get_header(); ?>
 
 	<?php
 	$page_id = get_the_ID();
-	$page_subtitle = get_post_meta( $page_id, 'opendept_excursion_subtitle_subtitle', true );
+	$page_subtitle = get_post_meta( $page_id, 'opendept_subtitle_subtitle', true );
 	$filter_posts = get_post_meta( $page_id, 'opendept_filter_excursion_filter_category', true );
-	$page_overlay_bg = get_post_meta( $page_id, 'opendept_hero_excursion_color', true );
-	$page_titles_align = get_post_meta( $page_id, 'opendept_hero_excursion_align', true );
-	$page_hero_height = get_post_meta( $page_id, 'opendept_hero_excursion_height', true );
+	$page_overlay_bg = get_post_meta( $page_id, 'opendept_hero_color', true );
+	$page_titles_align = get_post_meta( $page_id, 'opendept_hero_align', true );
+	$page_hero_height = get_post_meta( $page_id, 'opendept_hero_height', true );
 	$page_hero_bg_color = get_post_meta( $page_id, 'opendept_hero_excursion_bg_color', true );
-	$page_hero_mouse_icon = get_post_meta( $page_id, 'opendept_hero_excursion_mouse_icon', true );
+	$page_hero_mouse_icon = get_post_meta( $page_id, 'opendept_hero_mouse_icon', true );
 	$page_image_attributes = wp_get_attachment_image_src( get_post_thumbnail_id( $page_id ), 'full' );
-	$listed_posts_excursion_enable_subtitle = get_post_meta( $page_id, 'opendept_listed_posts_excursion_enable_subtitle', true );
-	$listed_posts_excursion_enable_meta = get_post_meta( $page_id, 'opendept_listed_posts_excursion_enable_meta_info', true );
-	$listed_posts_excursion_enable_button = get_post_meta( $page_id, 'opendept_listed_posts_excursion_enable_button', true );
-	$listed_posts_excursion_button_text = get_post_meta( $page_id, 'opendept_listed_posts_excursion_button_text', true );
-	$listed_posts_excursion_button_color = get_post_meta( $page_id, 'opendept_listed_posts_excursion_button_color', true );
-	$listed_posts_excursion_strip_title_link = get_post_meta( $page_id, 'opendept_listed_posts_excursion_strip_title_link', true );
-	$listed_posts_excursion_height = get_post_meta( $page_id, 'opendept_listed_posts_excursion_height', true );
-	$posts_per_page = get_theme_mod( 'excursion_posts_per_page', 4 );
+	$listed_posts_enable_subtitle = get_post_meta( $page_id, 'opendept_listed_posts_enable_subtitle', true );
+	$listed_posts_enable_meta = get_post_meta( $page_id, 'opendept_listed_posts_enable_meta_info', true );
+	$listed_posts_enable_button = get_post_meta( $page_id, 'opendept_listed_posts_enable_button', true );
+	$listed_posts_button_text = get_post_meta( $page_id, 'opendept_listed_posts_button_text', true );
+	$listed_posts_button_color = get_post_meta( $page_id, 'opendept_listed_posts_button_color', true );
+	$listed_posts_strip_title_link = get_post_meta( $page_id, 'opendept_listed_posts_strip_title_link', true );
+	$listed_posts_height = get_post_meta( $page_id, 'opendept_listed_posts_height', true );
+    $posts_per_page = get_theme_mod( 'excursion_posts_per_page', 4 );
 	?>
 
 	<div id="hero" class="hero is-bg-image is-text-light <?php echo sanitize_html_class( $page_titles_align ); ?> <?php echo sanitize_html_class( $page_hero_height ); ?> <?php echo sanitize_html_class( $page_hero_bg_color ); ?>"<?php if ( $page_image_attributes ) echo ' style="background-image: url(' . esc_url( $page_image_attributes[0] ) . ');"' ?>>
@@ -82,7 +82,7 @@ get_header(); ?>
 				?>
 
 				<div id="post-<?php the_ID(); ?>" <?php post_class( 'block block-split' ); ?>>
-					<div class="block-content<?php if( $listed_posts_excursion_height ) echo ' ' . sanitize_html_class( $listed_posts_excursion_height ); ?>">
+					<div class="block-content<?php if( $listed_posts_height ) echo ' ' . sanitize_html_class( $listed_posts_height ); ?>">
 						<div class="block-figure"<?php if ( $image_attributes ) echo 'style="background-image: url(' . esc_url( $image_attributes[0] ) . ');"' ?>>
 						</div>
 						<div class="container is-fluid">
@@ -90,18 +90,18 @@ get_header(); ?>
 								<div class="column is-6-desktop">
 									<div class="block-text">
 										<?php
-										if ( $listed_posts_excursion_strip_title_link ) :
+										if ( $listed_posts_strip_title_link ) :
 											the_title( '<h2 class="block-title">', '</h2>' );
 										else :
 											the_title( '<h2 class="block-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 										endif;
 										?>
 
-										<?php if ( $subtitle && $listed_posts_excursion_enable_subtitle ) : ?>
+										<?php if ( $subtitle && $listed_posts_enable_subtitle ) : ?>
 											<div class="block-subtitle"><?php echo esc_html( $subtitle ); ?></div>
 										<?php endif; ?>
 
-										<?php if ( $listed_posts_excursion_enable_meta ) : ?>
+										<?php if ( $listed_posts_enable_meta ) : ?>
 											<div class="extras-meta">
 												<div class="extras-meta-room">
 
@@ -129,8 +129,8 @@ get_header(); ?>
 
 										<?php echo do_shortcode( wpautop( wp_kses_post( $summary_content ) ) ); ?>
 
-										<?php if ( $listed_posts_excursion_enable_button ) : ?>
-											<a href="<?php the_permalink(); ?>" class="button <?php echo sanitize_html_class( $listed_posts_excursion_button_color ); ?>"><?php echo esc_html( $listed_posts_excursion_button_text ); ?></a>
+										<?php if ( $listed_posts_enable_button ) : ?>
+											<a href="<?php the_permalink(); ?>" class="button <?php echo sanitize_html_class( $listed_posts_button_color ); ?>"><?php echo esc_html( $listed_posts_button_text ); ?></a>
 										<?php endif; ?>
 
 									</div><!-- /.block-text -->
