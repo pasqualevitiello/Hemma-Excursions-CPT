@@ -273,7 +273,7 @@ add_action( 'after_setup_theme', 'hemma_customize_child_theme_setup' );
  */
 add_action( 'cmb2_admin_init', 'opendept_register_excursion_subtitle_metabox' );
 function opendept_register_excursion_subtitle_metabox() {
-	$prefix = 'opendept_subtitle_';
+	$prefix = 'opendept_excursion_subtitle_';
 
 	$cmb_subtitle = new_cmb2_box( array(
 		'id'            => $prefix . 'metabox',
