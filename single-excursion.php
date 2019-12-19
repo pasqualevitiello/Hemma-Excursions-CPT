@@ -11,7 +11,7 @@ get_header(); ?>
 
 	<?php
 	$the_id = get_the_ID();
-	$subtitle = get_post_meta( $the_id, 'opendept_subtitle_subtitle', true );
+	$subtitle = get_post_meta( $the_id, 'opendept_excursion_subtitle_subtitle', true );
 	$overlay_bg = get_post_meta( $the_id, 'opendept_hero_color', true );
 	$titles_align = get_post_meta( $the_id, 'opendept_hero_align', true );
 	$hero_height = get_post_meta( $the_id, 'opendept_hero_height', true );
